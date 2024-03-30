@@ -6,9 +6,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 import "./src/database/conection.js";
 
+import habitacionRouter from "./src/routes/habitacion.route.js";
+
 const app = express();
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4004;
 
 app.listen(PORT, () => {
     console.log("El servidor esta corriedo en: " + `http://localhost:${PORT}`);
@@ -21,3 +23,5 @@ app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "/public")));
+
+app.use("/api/admin", habitacionRouter);
