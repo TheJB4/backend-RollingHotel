@@ -36,3 +36,16 @@ export const listarUsuarios = async(req,res)=>{
         })
     }
 }
+
+export const obtenerUsuario = async(req, res)=>{
+    try{
+        console.log(req.params.id);
+
+        const UsuarioBuscado = await Usuario.findById(req.params.id);
+
+        res.status(200).json(UsuarioBuscado);
+    }catch(error){
+        console.error(error)
+        res.status(404).json({mensaje: "No se encontro el Usuario buscado"})
+    }
+}
