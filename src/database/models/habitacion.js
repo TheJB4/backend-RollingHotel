@@ -35,6 +35,18 @@ const habitacionSchema = new Schema({
         min: 1,
         max: 5,
     },
+    imagen: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (value) {
+                return /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i.test(
+                    value
+                );
+            },
+            message: (props) => `${props.value} no es una url valida`,
+        },
+    },
 });
 
 const Habitacion = mongoose.model("Habitacion", habitacionSchema);

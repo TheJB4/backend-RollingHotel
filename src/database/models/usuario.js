@@ -1,64 +1,45 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const usuarioSchema = new Schema({ 
-    apellido:{
+const usuarioSchema = new Schema({
+    apellido: {
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 30
+        maxLength: 30,
     },
-    nombre:{
+    nombre: {
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 30
+        maxLength: 30,
     },
-    telefono:{
+    telefono: {
         type: String,
         required: true,
         minLength: 6,
-        maxLength: 15
+        maxLength: 15,
     },
-    correo:{
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/.+\@.+\..+/, "Por favor ingrese un correo válido"],
+    },
+    password: {
         type: String,
         required: true,
         minLength: 8,
-        maxLength: 50
+        maxLength: 16,
+        match: [
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*.-]).{8,16}$/,
+            "La contraseña debe tener al menos una letra minuscula, una letra mayuscula, un numero y un caracter especial",
+        ],
     },
-    domicilio:{
-        type: String,
-        required: true,
-        minLength: 2,
-        maxLength: 50
+    esAdmin: {
+        type: Boolean,
     },
-    ciudad:{
-        type: String,
-        required: true,
-        minLength: 2,
-        maxLength: 300
-    },
-    provincia:{
-        type: String,
-        required: true,
-        minLength: 2,
-        maxLength: 30
-    },
-    pais:{
-        type: String,
-        required: true,
-        minLength: 2,
-        maxLength: 300
-    },
-    rol:{
-        type:String,
-        required:true,
-        enum:["Admin", "Cliente"]
-    },
-    esAdmin:{
-        type: Boolean
-    }
-})
+});
 
-const Usuario = mongoose.model('usuario',usuarioSchema)
+const Usuario = mongoose.model("Usuario", usuarioSchema);
 
 export default Usuario;
