@@ -5,13 +5,13 @@ const usuarioSchema = new Schema({
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 30,
+        maxLength: 40,
     },
     nombre: {
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 30,
+        maxLength: 40,
     },
     telefono: {
         type: String,
@@ -34,6 +34,10 @@ const usuarioSchema = new Schema({
             /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*.-]).{8,16}$/,
             "La contraseña debe tener al menos una letra minuscula, una letra mayuscula, un numero y un caracter especial",
         ],
+    },
+    activo: {
+        type: Boolean,
+        required: true,
     },
     esAdmin: {
         type: Boolean,
