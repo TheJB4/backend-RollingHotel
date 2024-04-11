@@ -51,7 +51,7 @@ export const deleteUsuario = async (req, res) => {
     }
 };
 
-export const editUsuario = async (req, res) => {
+export const putUsuario = async (req, res) => {
     try {
         const usuario = await Usuario.findById(req.params.id);
         if (!usuario) {

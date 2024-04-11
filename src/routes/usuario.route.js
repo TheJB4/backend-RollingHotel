@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
     deleteUsuario,
-    editUsuario,
+    putUsuario,
     getUsuarioById,
     getUsuarios,
     postUsuario,
@@ -16,7 +16,7 @@ router
 router
     .route("/usuario/:id")
     .get(getUsuarioById)
-    .put([validacionUsuario], editUsuario)
+    .put([validacionUsuario], putUsuario)
     .delete(deleteUsuario);
 
 export default router;

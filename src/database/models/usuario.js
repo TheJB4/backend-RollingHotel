@@ -41,6 +41,7 @@ const usuarioSchema = new Schema({
     },
     esAdmin: {
         type: Boolean,
+        required: true,
     },
 });
 
