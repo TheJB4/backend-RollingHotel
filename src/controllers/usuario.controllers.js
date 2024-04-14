@@ -43,6 +43,7 @@ export const login = async (req, res) => {
             message: "El usuario ingreso correctamente!",
             email: user.email,
             nombre: user.nombre,
+            esAdmin: user.esAdmin,
             token,
         });
     } catch (error) {
