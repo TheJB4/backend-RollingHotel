@@ -1,14 +1,54 @@
 import Usuario from "../database/models/usuario.js";
+import bcrypt from "bcrypt";
+import generarJWT from "../helpers/jwt/generarJWT.js";
 
 export const postUsuario = async (req, res) => {
     try {
+        const user = await Usuario.findOne({ email: req.body.email });
+        if (user) {
+            return res
+                .status(400)
+                .json({ message: "El email ya esta registrado" });
+        }
         const usuarioNew = new Usuario(req.body);
+        const salt = bcrypt.genSaltSync(10);
+        usuarioNew.password = bcrypt.hashSync(req.body.password, salt);
         await usuarioNew.save();
-        res.status(201).json("Se guardo un nuevo Usuario!");
+        res.status(201).json({ message: "Se guardo un nuevo Usuario!" });
     } catch (error) {
         console.error(error);
         res.status(400).json({
             mensaje: "error: no se pudo crear el Usuario",
+        });
+    }
+};
+
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await Usuario.findOne({ email });
+        if (!user) {
+            return res
+                .status(400)
+                .json({ message: "EMAIL o password incorrecto" });
+        }
+        const userPassword = bcrypt.compareSync(password, user.password);
+        if (!userPassword) {
+            return res
+                .status(400)
+                .json({ message: "Email o PASSWORD incorrecto" });
+        }
+        const token = await generarJWT(user._id, user.email);
+        res.status(200).json({
+            message: "El usuario ingreso correctamente!",
+            email: user.email,
+            nombre: user.nombre,
+            token,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensaje: "Error al comprobar credenciales del usuario",
         });
     }
 };

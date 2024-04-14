@@ -22,17 +22,7 @@ const validacionUsuario = [
         .withMessage("El correo del usuario es obligatorio")
         .matches(/.+\@.+\..+/)
         .withMessage("El correo electronico debe ser valido"),
-    check("password")
-        .notEmpty()
-        .withMessage("la contraseña es obligatoria")
-        .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*.-]).{8,16}$/
-        )
-        .withMessage(
-            "La contraseña debe tener al menos una letra minuscula, una letra mayuscula, un numero y un caracter especial"
-        )
-        .isLength({ min: 8, max: 16 })
-        .withMessage("La contraseña debe tener entre 8 y 16 caracteres"),
+    check("password").notEmpty().withMessage("la contraseña es obligatoria"),
     check("activo")
         .notEmpty()
         .withMessage("El estado del usuario es obligatorio")

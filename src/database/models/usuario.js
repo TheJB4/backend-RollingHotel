@@ -28,12 +28,6 @@ const usuarioSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8,
-        maxLength: 16,
-        match: [
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*.-]).{8,16}$/,
-            "La contraseña debe tener al menos una letra minuscula, una letra mayuscula, un numero y un caracter especial",
-        ],
     },
     activo: {
         type: Boolean,

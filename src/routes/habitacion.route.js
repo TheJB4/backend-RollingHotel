@@ -7,16 +7,17 @@ import {
     putHabitacion,
 } from "../controllers/habitacion.controllers.js";
 import validacionHabitacion from "../helpers/validations/validacionHabitacion.js";
+import validarJWT from "../helpers/jwt/validarJWT.js";
 const router = Router();
 
 router
     .route("/habitacion")
     .get(getHabitacion)
-    .post([validacionHabitacion], postHabitacion);
+    .post([validarJWT, validacionHabitacion], postHabitacion);
 router
     .route("/habitacion/:id")
-    .delete(deleteHabitacion)
+    .delete([validarJWT], deleteHabitacion)
     .get(getHabitacionById)
-    .put([validacionHabitacion], putHabitacion);
+    .put([validarJWT, validacionHabitacion], putHabitacion);
 
 export default router;
