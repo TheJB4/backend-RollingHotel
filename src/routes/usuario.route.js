@@ -9,12 +9,10 @@ import {
 import validacionUsuario from "../helpers/validations/validacionUsuario.js";
 const router = Router();
 
+router.route("/").get(getUsuarios).post([validacionUsuario], postUsuario);
+router.route("/auth")
 router
-    .route("/usuario")
-    .get(getUsuarios)
-    .post([validacionUsuario], postUsuario);
-router
-    .route("/usuario/:id")
+    .route("/:id")
     .get(getUsuarioById)
     .put([validacionUsuario], putUsuario)
     .delete(deleteUsuario);

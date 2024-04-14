@@ -1,8 +1,17 @@
 import Usuario from "../database/models/usuario.js";
+import bcrypt from "bcrypt";
 
 export const postUsuario = async (req, res) => {
     try {
+        const user = await Usuario.findOne({ email: req.body.email });
+        if (user) {
+            return res
+                .status(400)
+                .json({ message: "El email ya esta registrado" });
+        }
         const usuarioNew = new Usuario(req.body);
+        const salt = bcrypt.genSaltSync(10);
+        usuarioNew.password = bcrypt.hashSync(req.body.password, salt);
         await usuarioNew.save();
         res.status(201).json("Se guardo un nuevo Usuario!");
     } catch (error) {
