@@ -30,13 +30,16 @@ export const login = async (req, res) => {
         if (!user) {
             return res
                 .status(400)
-                .json({ message: "EMAIL o password incorrecto" });
+                .json({ message: "email o password incorrecto" });
         }
         const userPassword = bcrypt.compareSync(password, user.password);
         if (!userPassword) {
             return res
                 .status(400)
-                .json({ message: "Email o PASSWORD incorrecto" });
+                .json({ message: "Email o password incorrecto" });
+        }
+        if (!user.activo) {
+            return res.status(400).json({ message: "Usuario suspendido" });
         }
         const token = await generarJWT(user._id, user.email);
         res.status(200).json({
