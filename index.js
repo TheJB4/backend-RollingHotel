@@ -8,6 +8,7 @@ import "./src/database/conection.js";
 
 import habitacionRouter from "./src/routes/habitacion.route.js";
 import usuarioRouter from "./src/routes/usuario.route.js";
+import reservaRouter from "./src/routes/reserva.route.js"
 
 const app = express();
 
@@ -27,3 +28,4 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.use("/api", habitacionRouter);
 app.use("/api", usuarioRouter);
+app.use("/api", reservaRouter)
