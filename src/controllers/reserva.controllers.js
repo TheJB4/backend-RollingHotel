@@ -1,7 +1,6 @@
 import Reserva from "../database/models/reserva.js";
 
 export const postReserva = async (req, res) => {
-    const { idHabitacion, idUsuario, informacion } = req.body;
     try {
         const reserva = new Reserva(req.body);
         await reserva.save();
