@@ -11,10 +11,7 @@ import validacionUsuario from "../helpers/validations/validacionUsuario.js";
 import validarJWT from "../helpers/jwt/validarJWT.js";
 const router = Router();
 
-router
-    .route("/")
-    .get(getUsuarios)
-    .post([validarJWT, validacionUsuario], postUsuario);
+router.route("/").get(getUsuarios).post([validacionUsuario], postUsuario);
 router.route("/auth").post(login);
 router
     .route("/:id")
