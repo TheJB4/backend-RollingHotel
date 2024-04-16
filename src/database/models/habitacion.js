@@ -35,11 +35,14 @@ const habitacionSchema = new Schema({
         min: 1,
         max: 5,
     },
-    fechaOcupada: {
-        type: [String],
-        required: true,
-        default: ["", ""],
-    },
+    fechaOcupada: [
+        {
+            type: [Object, Object],
+            required: true,
+            default: ["", ""],
+        },
+    ],
+
     imagen: {
         type: String,
         required: true,
